@@ -12,17 +12,17 @@ import socket
 
 
 def check_cpu(cpu_percent_usage_threshold):
-    """ Checks of CPU percent load is below given threshold.
+    """ Checks if CPU percent load is below given threshold.
 
     Args:
         cpu_percent_usage_threshold(int): The percent threshold you want the cpu
         to be above.
 
     Returns:
-        (Bool): Returns true if cpu load get below the threshold.
+        (Bool): Returns true if cpu load is below the threshold.
     """
     cpu_percent_usage = psutil.cpu_percent(interval=1, percpu=False)
-    return cpu_percent_usage > cpu_percent_usage_threshold
+    return cpu_percent_usage < cpu_percent_usage_threshold
 
 
 def check_disk_space(available_disk_space_percent_threshold):
