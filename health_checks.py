@@ -12,32 +12,32 @@ import socket
 
 
 def check_cpu(cpu_percent_usage_threshold):
-    """ Checks of CPU percent load is below given threshold.
+    """ Checks if CPU percent load is below given threshold.
 
     Args:
         cpu_percent_usage_threshold(int): The percent threshold you want the cpu
         to be above.
 
     Returns:
-        (Bool): Returns true if cpu load get below the threshold.
+        (Bool): Returns true if cpu load is below the threshold.
     """
     cpu_percent_usage = psutil.cpu_percent(interval=1, percpu=False)
-    return cpu_percent_usage > cpu_percent_usage_threshold
+    return cpu_percent_usage < cpu_percent_usage_threshold
 
 
 def check_disk_space(available_disk_space_percent_threshold):
-    """ Checks if disk space is below given threshold.
+    """ Checks if disk space is above given threshold.
 
     Args:
         available_disk_space_percent_threshold(int): The disk space threshold
         you want the root drive to be above.
 
     Returns:
-        (Bool): Returns true if disk space gets below the threshold.
+        (Bool): Returns true if disk space is above the given threshold.
     """
     total_disk_space, used_disk_space, free_disk_space = shutil.disk_usage("/")
     available_disk_space_percent = (free_disk_space / total_disk_space) * 100
-    return available_disk_space_percent < available_disk_space_percent_threshold
+    return available_disk_space_percent > available_disk_space_percent_threshold
 
 
 def check_memory(memory_threshold):
