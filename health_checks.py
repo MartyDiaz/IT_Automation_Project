@@ -26,18 +26,18 @@ def check_cpu(cpu_percent_usage_threshold):
 
 
 def check_disk_space(available_disk_space_percent_threshold):
-    """ Checks if disk space is below given threshold.
+    """ Checks if disk space is above given threshold.
 
     Args:
         available_disk_space_percent_threshold(int): The disk space threshold
         you want the root drive to be above.
 
     Returns:
-        (Bool): Returns true if disk space gets below the threshold.
+        (Bool): Returns true if disk space is above the given threshold.
     """
     total_disk_space, used_disk_space, free_disk_space = shutil.disk_usage("/")
     available_disk_space_percent = (free_disk_space / total_disk_space) * 100
-    return available_disk_space_percent < available_disk_space_percent_threshold
+    return available_disk_space_percent > available_disk_space_percent_threshold
 
 
 def check_memory(memory_threshold):
