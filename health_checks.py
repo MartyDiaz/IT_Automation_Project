@@ -41,17 +41,17 @@ def check_disk_space(available_disk_space_percent_threshold):
 
 
 def check_memory(memory_threshold):
-    """ Checks if system memory is below given threshold in bytes.
+    """ Checks if system memory is above given threshold in bytes.
 
     Args:
         memory_threshold(int): The memory threshold in Bytes.
 
     Returns:
-        (Bool): Returns true if memory is below given threshold.
+        (Bool): Returns true if memory is above given threshold.
     """
     memory = psutil.virtual_memory()
     memory_available = memory.available
-    return memory_available < memory_threshold
+    return memory_available > memory_threshold
 
 
 def check_localhost_name_resolution():
@@ -114,6 +114,7 @@ def check_systems():
     if check_localhost_name_resolution():
         subject = 'Error - localhost cannot be resolved to 127.0.0.1'
         email_health_error(subject)
+
 
 def main():
     check_systems()
