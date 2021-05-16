@@ -64,7 +64,7 @@ def check_localhost_name_resolution():
         (Bool): Returns true if localhost ip is not 127.0.0.1
     """
     local_host_ip = socket.gethostbyname('localhost')
-    return local_host_ip != '127.0.0.1'
+    return local_host_ip == '127.0.0.1'
 
 
 def email_health_error(subject):

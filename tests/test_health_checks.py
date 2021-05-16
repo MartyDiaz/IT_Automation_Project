@@ -27,3 +27,9 @@ def test_check_memory(mock_psutil_virtual_memory, _input, expected):
     mock_psutil_virtual_memory.return_value = mock.Mock(**{"available": _input})
     assert check_memory(500) == expected
     mock_psutil_virtual_memory.assert_called()
+
+@pytest.mark.parametrize("_input, expected", [('127.0.0.1', True), ('123.0.0.1', False)])
+@mock.patch("health_checks.socket.gethostbyname")
+def test_check_localhost_name_resolution(mock_socket_gethostbyname, _input, expected):
+    mock_socket_gethostbyname.return_value = _input
+    assert check_localhost_name_resolution() == expected
