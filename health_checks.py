@@ -81,8 +81,8 @@ def email_health_error(subject):
     """
     sender = 'automation@example.com'
     receiver = '@example.com'
-    email_body = 'Please check your system and ' \
-                'resolve the issue as soon as possible.'
+    email_body = 'Please check your system and resolve the issue as soon as ' \
+                 'possible.'
     message = emails.generate_email(sender, receiver, subject, email_body)
     emails.send_email(message)
 
@@ -103,15 +103,15 @@ def check_systems():
     available_disk_space_percent_threshold = 20
     memory_threshold = 500 * 1024 * 1024 # 500MB
 
-    if check_cpu(cpu_percent_usage_threshold):
+    if not check_cpu(cpu_percent_usage_threshold):
         subject = 'Error - CPU usage is over 80%'
         email_health_error(subject)
 
-    if check_disk_space(available_disk_space_percent_threshold):
+    if not check_disk_space(available_disk_space_percent_threshold):
         subject = 'Error - Available disk space is less than 20%'
         email_health_error(subject)
 
-    if check_localhost_name_resolution():
+    if not check_localhost_name_resolution():
         subject = 'Error - localhost cannot be resolved to 127.0.0.1'
         email_health_error(subject)
 
