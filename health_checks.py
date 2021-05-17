@@ -88,7 +88,7 @@ def email_health_error(subject):
 
 
 def check_systems():
-    """ Runs all check functions and emails a error message if any return true.
+    """ Runs all check functions and emails a error message if any return false.
 
         Used in main function. Can set up a cron job with this script to monitor
         system health.
