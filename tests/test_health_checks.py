@@ -3,7 +3,8 @@
 import pytest
 from unittest import mock
 from health_checks import check_cpu, check_disk_space, check_memory, \
-    check_localhost_name_resolution, check_systems
+    check_localhost_name_resolution, check_systems, email_health_error
+
 
 @pytest.mark.parametrize("_input, expected", [(20, True), (80, False)])
 @mock.patch("health_checks.psutil.cpu_percent")
@@ -35,7 +36,8 @@ def test_check_memory(mock_psutil_virtual_memory, _input, expected):
 
 @pytest.mark.parametrize(
     "_input, expected",
-    [('127.0.0.1', True), ('123.0.0.1', False)]
+    [('127.0.0.1', True),
+     ('123.0.0.1', False)]
 )
 @mock.patch("health_checks.socket.gethostbyname")
 def test_check_localhost_name_resolution(
@@ -46,6 +48,29 @@ def test_check_localhost_name_resolution(
     mock_socket_gethostbyname.return_value = _input
     assert check_localhost_name_resolution() == expected
     mock_socket_gethostbyname.assert_called()
+
+
+@mock.patch("health_checks.emails")
+def test_email_health_error(mock_emails):
+    test_subject = "Test Subject"
+    test_message = "Test Message"
+    mock_emails_generate_email_arguments = (
+        'automation@example.com',
+        '@example.com',
+        test_subject,
+        'Please check your system and resolve the issue as soon as possible.'
+    )
+
+    mock_emails.return_value = mock.Mock(
+        **{"generate_email.return_value": test_message,
+           "send_email.return_value": "Sent Email"}
+    )
+
+    email_health_error(test_subject)
+    mock_emails.generate_email.assert_called()
+    mock_emails.send_email.assert_called()
+    mock_emails.generate_email.assert_called_with(
+        *mock_emails_generate_email_arguments)
 
 
 @pytest.mark.parametrize(
@@ -74,7 +99,6 @@ def test_check_systems(
     ]
 
     check_systems()
-
     assert mock_email_health_error.call_count == expected
     if mock_email_health_error.call_count == 3:
         mock_email_health_error.assert_has_calls(
