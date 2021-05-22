@@ -91,7 +91,6 @@ def test_check_systems(
     mock_check_localhost_name_resolution.return_value = _input[0]
     mock_check_disk_space.return_value = _input[1]
     mock_check_cpu.return_value = _input[2]
-
     mock_email_health_error_call_list = [
         mock.call('Error - CPU usage is over 80%'),
         mock.call('Error - Available disk space is less than 20%'),

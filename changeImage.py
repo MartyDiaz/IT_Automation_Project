@@ -17,7 +17,7 @@ def resize_image(image, resize_width, resize_height):
     Returns:
         Image: Returns an Image object with new dimensions.
     """
-    image_resized = image.resize((resize_width,resize_height))
+    image_resized = image.resize((resize_width, resize_height))
     return image_resized
 
 
@@ -77,7 +77,7 @@ def main():
                                                  '/images'
     resize_width = 600
     resize_height = 400
-    convert_tiff(image_directory,resize_width,resize_height,output_directory)
+    convert_tiff(image_directory, resize_width, resize_height, output_directory)
 
 
 if __name__ == "__main__":
