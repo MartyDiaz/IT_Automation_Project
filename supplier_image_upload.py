@@ -17,9 +17,13 @@ def post_images():
         None
     """
     url = "http://localhost/upload/"
-    image_directory = os.path.expanduser('~') + '/Documents/google_class/project_8/supplier-data/images'
+    image_directory = os.path.expanduser('~') + '/Documents/' \
+                                                'google_class/' \
+                                                'project_8/' \
+                                                'supplier-data' \
+                                                '/images'
     for root,dirs,files in os.walk(image_directory):
-        files = [f for f in files if notf[0] == '.']
+        files = [f for f in files if not[0] == '.']
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
             if '.jpeg' in file:

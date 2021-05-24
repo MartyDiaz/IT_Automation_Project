@@ -103,4 +103,3 @@ def test_check_systems(
         mock_email_health_error.assert_has_calls(
             calls=mock_email_health_error_call_list
         )
-
