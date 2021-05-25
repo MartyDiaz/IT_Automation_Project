@@ -4,16 +4,6 @@ import os
 from unittest import mock
 from changeImage import resize_image, save_image_jpeg, convert_tiff
 
-'''
-@mock.patch("changeImage.Image.resize")
-@mock.patch("changeImage.Image")
-def test_resize_image(mock_Image, mock_Image_resize):
-    resize_width= 10
-    resize_height = 10
-    resize_image(mock_Image, resize_width, resize_height)
-    mock_Image_resize.assert_called_with((resize_width, resize_height))
-'''
-
 
 def test_resize_image():
     im = Image.new("L", (100, 100))
