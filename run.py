@@ -60,7 +60,7 @@ def read_description_directory(description_directory):
     return data_list
 
 
-def post_desciption(url, data_list):
+def post_description(url, data_list):
     """ Makes a post request to google's class website expecting json objects
         with information on fruits.
 
@@ -85,7 +85,7 @@ def main():
                                                         '/supplier-data' \
                                                         '/descriptions'
     data_list = read_description_directory(description_directory)
-    post_desciption(url, data_list)
+    post_description(url, data_list)
 
 
 if __name__ == "__main__":
