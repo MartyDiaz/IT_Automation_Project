@@ -61,9 +61,8 @@ def convert_tiff(image_directory,
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
             if '.tiff' in file:
-                image_path = os.path.join(root,file)
+                image_path = os.path.join(root, file)
                 with Image.open(image_path) as im:
-                    im = im.convert('RGB')
                     im_resized = resize_image(im, resize_width, resize_height)
                     save_image_jpeg(im_resized, file, output_directory)
 
