@@ -33,7 +33,8 @@ def save_image_jpeg(image, image_file_name, output_directory):
         None
     """
     file_name, extension = os.path.splitext(image_file_name)
-    out_file = output_directory + "/" + file_name + ".jpeg"
+    out_file = os.path.join(output_directory , file_name + ".jpeg")
+    image = image.convert('RGB')
     image.save(out_file)
 
 
