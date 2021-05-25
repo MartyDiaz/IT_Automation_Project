@@ -2,7 +2,7 @@ import pytest
 from PIL import Image
 import os
 from unittest import mock
-from changeImage import resize_image, save_image_jpeg
+from changeImage import resize_image, save_image_jpeg, convert_tiff
 
 '''
 @mock.patch("changeImage.Image.resize")
@@ -34,3 +34,18 @@ def test_save_image_jpeg(tmpdir):
         save_image_jpeg(im, image_file_name, tmpdir)
     test_file = os.path.join(tmpdir, '001.jpeg')
     assert os.path.isfile(test_file)
+
+
+def test_convert_tiff(tmpdir):
+    test_image_directory = os.path.expanduser('~') + '/Documents' \
+                                           '/google_class' \
+                                           '/project_8' \
+                                           '/tests' \
+                                           '/images'
+    resize_width = 600
+    resize_height = 400
+    convert_tiff(test_image_directory, resize_width, resize_height, tmpdir)
+
+    test_jpeg_list = ['001.jpeg', '002.jpeg']
+    for test_jpeg_file in test_jpeg_list:
+        assert os.path.isfile(os.path.join(tmpdir, test_jpeg_file))
