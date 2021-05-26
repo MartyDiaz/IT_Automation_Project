@@ -9,7 +9,7 @@ import os
 
 
 def post_images():
-    """ This funtion makes a post request for every jpeg image in a directory.
+    """ This function makes a post request for every jpeg image in a directory.
     Args:
         None
 
@@ -28,8 +28,8 @@ def post_images():
         for file in files:
             if '.jpeg' in file:
                 image_path = os.path.join(root, file)
-                with open(image_path, 'rb') as opened:
-                    request = requests.post(url, files={'file': opened})
+                with open(image_path, 'rb') as im:
+                    request = requests.post(url, files={'file': im})
 
 
 def main():
