@@ -1,5 +1,7 @@
-from run import read_description_directory
+from run import read_description_directory, post_description
 import os
+import pytest
+from unittest import mock
 
 def test_read_description_directory():
     test_description_directory = os.path.join(
@@ -34,7 +36,31 @@ def test_read_description_directory():
                                 'calcium and magnesium, which can help prevent '
                                 'and delay bone loss and maintain bone health. '
                                 'It is good for young and old.\xa0 ',
-                 'image_name': '001.jpeg'}]
+                 'image_name': '001.jpeg'}
+                ]
 
     dic = read_description_directory(test_description_directory)
     assert (dic == test_dic)
+
+
+@pytest.mark.parametrize(
+    "_input, expected",
+    [(201, "Success"), (400, "POST error status=400")]
+)
+@mock.patch("run.requests.post")
+def test_post_description(mock_requests_post, _input, expected):
+    mock_requests_post.return_value = mock.Mock(**{"status_code": _input})
+
+    data_list = [ "test data 1", "test data 2"]
+    test_url = "test url"
+
+    if _input != 201:
+        with pytest.raises(Exception, match=expected):
+            post_description(test_url, data_list)
+    else:
+        post_description(test_url, data_list)
+
+    mock_requests_post.assert_called()
+
+
+

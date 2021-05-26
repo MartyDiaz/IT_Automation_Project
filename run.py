@@ -72,7 +72,7 @@ def post_description(url, data_list):
         None:
     """
     for data in data_list:
-        request = requests.post(url, json = data)
+        request = requests.post(url, json=data)
         if request.status_code != 201:
             raise Exception('POST error status={}'.format(request.status_code))
 
