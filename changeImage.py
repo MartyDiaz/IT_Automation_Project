@@ -56,7 +56,7 @@ def convert_tiff(image_directory,
         None
     """
     for root, dirs, files in os.walk(image_directory):
-        #Ignoring hidden files and directories
+        # Ignoring hidden files and directories
         files = [f for f in files if not f[0] == '.']
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
