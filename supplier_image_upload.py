@@ -16,7 +16,7 @@ def post_images(url, image_directory):
     Returns:
         None
     """
-    for root,dirs,files in os.walk(image_directory):
+    for root, dirs, files in os.walk(image_directory):
         files = [f for f in files if not[0] == '.']
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
@@ -24,16 +24,18 @@ def post_images(url, image_directory):
                 image_path = os.path.join(root, file)
                 with open(image_path, 'rb') as im:
                     request = requests.post(url, files={'file': im})
-
+                    if request.status_code != 201:
+                        raise Exception(
+                            'POST error status={}'.format(request.status_code))
 
 def main():
     url = "http://localhost/upload/"
 
-    image_directory = os.path.expanduser('~') + '/Documents/' \
-                                                'google_class/' \
-                                                'project_8/' \
-                                                'supplier-data/' \
-                                                'images'
+    image_directory = os.path.expanduser('~') + '/Documents' \
+                                                '/google_class' \
+                                                '/project_8' \
+                                                '/supplier-data' \
+                                                '/images'
 
     post_images(url, image_directory)
 
