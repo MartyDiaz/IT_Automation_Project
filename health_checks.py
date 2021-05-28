@@ -41,17 +41,17 @@ def check_disk_space(available_disk_space_percent_threshold):
 
 
 def check_memory(memory_threshold):
-    """ Checks if system memory is below given threshold in bytes.
+    """ Checks if system memory is above given threshold in bytes.
 
     Args:
         memory_threshold(int): The memory threshold in Bytes.
 
     Returns:
-        (Bool): Returns true if memory is below given threshold.
+        (Bool): Returns true if memory is above given threshold.
     """
     memory = psutil.virtual_memory()
     memory_available = memory.available
-    return memory_available < memory_threshold
+    return memory_available > memory_threshold
 
 
 def check_localhost_name_resolution():
@@ -64,7 +64,7 @@ def check_localhost_name_resolution():
         (Bool): Returns true if localhost ip is not 127.0.0.1
     """
     local_host_ip = socket.gethostbyname('localhost')
-    return local_host_ip != '127.0.0.1'
+    return local_host_ip == '127.0.0.1'
 
 
 def email_health_error(subject):
@@ -81,14 +81,14 @@ def email_health_error(subject):
     """
     sender = 'automation@example.com'
     receiver = '@example.com'
-    email_body = 'Please check your system and ' \
-                'resolve the issue as soon as possible.'
+    email_body = 'Please check your system and resolve the issue as soon as ' \
+                 'possible.'
     message = emails.generate_email(sender, receiver, subject, email_body)
     emails.send_email(message)
 
 
 def check_systems():
-    """ Runs all check functions and emails a error message if any return true.
+    """ Runs all check functions and emails a error message if any return false.
 
         Used in main function. Can set up a cron job with this script to monitor
         system health.
@@ -103,17 +103,18 @@ def check_systems():
     available_disk_space_percent_threshold = 20
     memory_threshold = 500 * 1024 * 1024 # 500MB
 
-    if check_cpu(cpu_percent_usage_threshold):
+    if not check_cpu(cpu_percent_usage_threshold):
         subject = 'Error - CPU usage is over 80%'
         email_health_error(subject)
 
-    if check_disk_space(available_disk_space_percent_threshold):
+    if not check_disk_space(available_disk_space_percent_threshold):
         subject = 'Error - Available disk space is less than 20%'
         email_health_error(subject)
 
-    if check_localhost_name_resolution():
+    if not check_localhost_name_resolution():
         subject = 'Error - localhost cannot be resolved to 127.0.0.1'
         email_health_error(subject)
+
 
 def main():
     check_systems()

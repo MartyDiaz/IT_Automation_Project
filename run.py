@@ -11,7 +11,7 @@ import requests
 
 
 def read_description_directory(description_directory):
-    """ Reads a directory with files descibing each fruit. Returns a list of
+    """ Reads a directory with files describing each fruit. Returns a list of
         dictionaries. Each dictionary contains information from each file read.
 
         The data being read is in files with the following format
@@ -19,7 +19,7 @@ def read_description_directory(description_directory):
         Fruit weight
         Fruit descriptions
 
-        Each ditionary in the returned list will look like this
+        Each dictionary in the returned list will look like this
         {
             'name': fruit_name,
             weight: 'fruit_weight',
@@ -32,7 +32,7 @@ def read_description_directory(description_directory):
         each fruit.
 
     Returns:
-        data_list(list): List of dictionaires containing information for each
+        data_list(list): List of dictionaries containing information for each
         fruit
     """
     data_list = []
@@ -60,7 +60,7 @@ def read_description_directory(description_directory):
     return data_list
 
 
-def post_desciption(url, data_list):
+def post_description(url, data_list):
     """ Makes a post request to google's class website expecting json objects
         with information on fruits.
 
@@ -72,7 +72,7 @@ def post_desciption(url, data_list):
         None:
     """
     for data in data_list:
-        request = requests.post(url, json = data)
+        request = requests.post(url, json=data)
         if request.status_code != 201:
             raise Exception('POST error status={}'.format(request.status_code))
 
@@ -85,7 +85,7 @@ def main():
                                                         '/supplier-data' \
                                                         '/descriptions'
     data_list = read_description_directory(description_directory)
-    post_desciption(url, data_list)
+    post_description(url, data_list)
 
 
 if __name__ == "__main__":
