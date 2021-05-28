@@ -11,7 +11,7 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
 
     Args:
         sender(string): The sender of the email message.
-        recipient(string): The recipientof the email message.
+        recipient(string): The recipient of the email message.
         subject(string): The subject text in the email message.
         body(string): The body of text in the email message.
         attachment_path(string): Optional path of file being attached to email.
