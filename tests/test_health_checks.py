@@ -75,8 +75,9 @@ def test_email_health_error(mock_emails):
 
 @pytest.mark.parametrize(
     "_input, expected",
-    [([True, True, True], 0), ([False, False, False], 3)]
+    [([True, True, True, True], 0), ([False, False, False, False], 4)]
 )
+@mock.patch("health_checks.check_memory")
 @mock.patch("health_checks.email_health_error")
 @mock.patch("health_checks.check_cpu")
 @mock.patch("health_checks.check_disk_space")
@@ -86,20 +87,33 @@ def test_check_systems(
         mock_check_disk_space,
         mock_check_cpu,
         mock_email_health_error,
+        mock_check_memory,
         _input, expected
 ):
+    cpu_percent_usage_threshold = 80
+    available_disk_space_percent_threshold = 20
+    memory_threshold = 500 * 1024 * 1024  # 500MB
+
     mock_check_localhost_name_resolution.return_value = _input[0]
     mock_check_disk_space.return_value = _input[1]
     mock_check_cpu.return_value = _input[2]
+    mock_check_memory.return_value = _input[3]
+
     mock_email_health_error_call_list = [
-        mock.call('Error - CPU usage is over 80%'),
-        mock.call('Error - Available disk space is less than 20%'),
+        mock.call('Error - CPU usage is over ' + str(
+            cpu_percent_usage_threshold) + 'percent'),
+        mock.call('Error - Available disk space is less than ' + str(
+            available_disk_space_percent_threshold)),
         mock.call('Error - localhost cannot be resolved to 127.0.0.1'),
+        mock.call('Error - Available memory is less than ' + str(memory_threshold))
     ]
 
-    check_systems()
+    check_systems(cpu_percent_usage_threshold,
+                  available_disk_space_percent_threshold,
+                  memory_threshold)
+
     assert mock_email_health_error.call_count == expected
-    if mock_email_health_error.call_count == 3:
+    if mock_email_health_error.call_count == 4:
         mock_email_health_error.assert_has_calls(
             calls=mock_email_health_error_call_list
         )

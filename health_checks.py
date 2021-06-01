@@ -103,8 +103,8 @@ def check_systems(cpu_percent_usage_threshold,
         None
     """
     if not check_cpu(cpu_percent_usage_threshold):
-        subject = 'Error - CPU usage is over ' + str(cpu_percent_usage_threshold) \
-                  + 'percent'
+        subject = 'Error - CPU usage is over ' + str(
+            cpu_percent_usage_threshold) + 'percent'
         email_health_error(subject)
 
     if not check_disk_space(available_disk_space_percent_threshold):
@@ -118,7 +118,8 @@ def check_systems(cpu_percent_usage_threshold,
         email_health_error(subject)
 
     if not check_memory(memory_threshold):
-        subject = 'Error - Avialable memory is less than ' + str(memory_threshold)
+        subject = 'Error - Available memory is less than ' + str(memory_threshold)
+        email_health_error(subject)
 
 
 def main():
