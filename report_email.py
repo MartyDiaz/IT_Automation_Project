@@ -71,8 +71,7 @@ def main():
                                                     '/google_class' \
                                                     '/project_8' \
                                                     '/supplier-data' \
-                                                    '/descriptions' \
-                                                    '/'
+                                                    '/descriptions'
     name_list, weight_list = read_data(description_directory)
     paragraph = '<br /><br />' + summary_data(name_list, weight_list)
     todays_date = date.today().strftime("%B %d, %Y")
