@@ -87,37 +87,48 @@ def email_health_error(subject):
     emails.send_email(message)
 
 
-def check_systems():
+def check_systems(cpu_percent_usage_threshold,
+                  available_disk_space_percent_threshold,
+                  memory_threshold):
     """ Runs all check functions and emails a error message if any return false.
 
         Used in main function. Can set up a cron job with this script to monitor
         system health.
 
     Args:
-        None
-
+        cpu_percent_usage_threshold(int):
+        available_disk_space_percent_threshold(int):
+        memory_threshold(int):
     Returns:
         None
     """
-    cpu_percent_usage_threshold = 80
-    available_disk_space_percent_threshold = 20
-    memory_threshold = 500 * 1024 * 1024 # 500MB
-
     if not check_cpu(cpu_percent_usage_threshold):
-        subject = 'Error - CPU usage is over 80%'
+        subject = 'Error - CPU usage is over ' + str(cpu_percent_usage_threshold) \
+                  + 'percent'
         email_health_error(subject)
 
     if not check_disk_space(available_disk_space_percent_threshold):
-        subject = 'Error - Available disk space is less than 20%'
+        subject = 'Error - Available disk space is less than ' + str(
+            available_disk_space_percent_threshold
+        )
         email_health_error(subject)
 
     if not check_localhost_name_resolution():
         subject = 'Error - localhost cannot be resolved to 127.0.0.1'
         email_health_error(subject)
 
+    if not check_memory(memory_threshold):
+        subject = 'Error - Avialable memory is less than ' + str(memory_threshold)
+
 
 def main():
-    check_systems()
+    cpu_percent_usage_threshold = 80
+    available_disk_space_percent_threshold = 20
+    memory_threshold = 500 * 1024 * 1024  # 500MB
+
+    check_systems(cpu_percent_usage_threshold,
+                  available_disk_space_percent_threshold,
+                  memory_threshold)
 
 
 if __name__ == "__main__":
