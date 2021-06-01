@@ -2,8 +2,8 @@
 """ This module contains functions for checking if system resources are
     overloaded and then emailing a error message.
 
-    Thresholds are passed into functions and they return true if system
-    resources are below the thresholds.
+    Thresholds are passed into check functions and they return false if system
+    resources are below the thresholds, indicating that the system has failed.
 """
 import shutil
 import psutil
@@ -96,9 +96,13 @@ def check_systems(cpu_percent_usage_threshold,
         system health.
 
     Args:
-        cpu_percent_usage_threshold(int):
-        available_disk_space_percent_threshold(int):
-        memory_threshold(int):
+        cpu_percent_usage_threshold(int): The percent threshold you want the cpu
+        to be above.
+
+        available_disk_space_percent_threshold(int): The disk space threshold
+        you want the root drive to be above.
+
+        memory_threshold(int): The memory threshold in Bytes.
     Returns:
         None
     """
