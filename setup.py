@@ -7,17 +7,18 @@ from setuptools import setup, find_packages
 ##############################################################################
 NAME = "it-automation-martin"
 PACKAGES = find_packages(where="src")
-META_PATH = os.path.join("src", "attr", "__init__.py")
-KEYWORDS = ["class", "attribute", "boilerplate"] ???????
-CLASSIFIERS=[
+META_PATH = os.path.join("src", "it_automation", "__init__.py")
+KEYWORDS = []
+CLASSIFIERS = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
 ]
-INSTALL_REQUIRES = ["requests", "PIL", "psutil", "reportlab"]
+INSTALL_REQUIRES = ["requests", "Pillow", "psutil", "reportlab"]
 ##############################################################################
 
 HERE = os.path.abspath(os.path.dirname(__file__))
+
 
 def read(*parts):
     """
@@ -29,6 +30,7 @@ def read(*parts):
 
 
 META_FILE = read(META_PATH)
+
 
 def find_meta(meta):
     """
@@ -62,5 +64,6 @@ if __name__ == "__main__":
         zip_safe=False,
         classifiers=CLASSIFIERS,
         install_requires=INSTALL_REQUIRES,
+        extras_require={'test': ['pytest', 'pytest-watch']},
         options={"bdist_wheel": {"universal": "1"}},
     )

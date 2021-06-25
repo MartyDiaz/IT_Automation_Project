@@ -1,12 +1,11 @@
 import pytest
 from unittest import mock
-from reports import generate_report
+from it_automation.reports import generate_report
 
-
-@mock.patch("reports.getSampleStyleSheet")
-@mock.patch("reports.Paragraph")
-@mock.patch("reports.Spacer")
-@mock.patch("reports.SimpleDocTemplate")
+@mock.patch("it_automation.reports.getSampleStyleSheet")
+@mock.patch("it_automation.reports.Paragraph")
+@mock.patch("it_automation.reports.Spacer")
+@mock.patch("it_automation.reports.SimpleDocTemplate")
 def test_generate_report(mock_simpleDocTemplate,
                          mock_spacer,
                          mock_paragraph,

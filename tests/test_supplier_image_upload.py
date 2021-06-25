@@ -1,13 +1,13 @@
 import os.path
 import pytest
 from unittest import mock
-from supplier_image_upload import post_images
+from it_automation.supplier_image_upload import post_images
 
 @pytest.mark.parametrize(
     "_input, expected",
     [(201, "Success"), (400, "POST error status=400")]
 )
-@mock.patch("run.requests.post")
+@mock.patch("it_automation.run.requests.post")
 def test_post_images(mock_requests_post, _input, expected):
     mock_requests_post.return_value = mock.Mock(**{"status_code": _input})
 

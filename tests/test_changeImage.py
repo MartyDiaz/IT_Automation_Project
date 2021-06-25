@@ -2,7 +2,7 @@ import pytest
 from PIL import Image
 import os
 from unittest import mock
-from changeImage import resize_image, save_image_jpeg, convert_tiff
+from it_automation.changeImage import resize_image, save_image_jpeg, convert_tiff
 
 
 def test_resize_image():

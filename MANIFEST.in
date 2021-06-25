@@ -1,7 +1,7 @@
-include LICENSE *.rst *.toml *.yml *.yaml *.ini
+include LICENSE *.rst *.toml *.yml *.yaml *.ini *.md
 graft .github
 
 # Tests
-recursive-include tests *.py
-recursive-include tests/images *.jpeg *.tiff
-recursive-include tests/test_data *.txt
+graft tests
+
+graft supplier-data

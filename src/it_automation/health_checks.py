@@ -7,7 +7,7 @@
 """
 import shutil
 import psutil
-import emails
+from it_automation import emails
 import socket
 
 

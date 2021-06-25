@@ -5,8 +5,8 @@
 """
 import os
 from datetime import date
-import reports
-import emails
+from it_automation import reports
+from it_automation import emails
 
 
 def read_data(description_directory):

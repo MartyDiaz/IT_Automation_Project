@@ -1,4 +1,4 @@
-from run import read_description_directory, post_description
+from it_automation.run import read_description_directory, post_description
 import os
 import pytest
 from unittest import mock
@@ -47,7 +47,7 @@ def test_read_description_directory():
     "_input, expected",
     [(201, "Success"), (400, "POST error status=400")]
 )
-@mock.patch("run.requests.post")
+@mock.patch("it_automation.run.requests.post")
 def test_post_description(mock_requests_post, _input, expected):
     mock_requests_post.return_value = mock.Mock(**{"status_code": _input})
 
@@ -61,6 +61,3 @@ def test_post_description(mock_requests_post, _input, expected):
         post_description(test_url, data_list)
 
     mock_requests_post.assert_called()
-
-
-
