@@ -2,7 +2,7 @@ import pytest
 from PIL import Image
 import os
 from unittest import mock
-from it_automation.changeImage import resize_image, save_image_jpeg, convert_tiff
+from it_automation.changeImage import resize_image, save_image_jpeg, convert_image
 
 
 def test_resize_image():
@@ -34,7 +34,7 @@ def test_convert_tiff(tmpdir):
                                            '/images'
     resize_width = 600
     resize_height = 400
-    convert_tiff(test_image_directory, resize_width, resize_height, tmpdir)
+    convert_image(test_image_directory, resize_width, resize_height, tmpdir)
 
     test_jpeg_list = ['001.jpeg', '002.jpeg']
     for test_jpeg_file in test_jpeg_list:

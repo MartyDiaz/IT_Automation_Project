@@ -64,29 +64,3 @@ def summary_data(name_list, weight_list):
         summary += 'name: {} <br /> weight: {} <br /><br />'.format(name_list[i],
                                                                 weight_list[i])
     return summary
-
-
-def main():
-    description_directory = os.path.expanduser('~') + '/Documents' \
-                                                    '/google_class' \
-                                                    '/project_8' \
-                                                    '/supplier-data' \
-                                                    '/descriptions'
-    name_list, weight_list = read_data(description_directory)
-    paragraph = '<br /><br />' + summary_data(name_list, weight_list)
-    todays_date = date.today().strftime("%B %d, %Y")
-    title = 'Processed Update on {}'.format(todays_date)
-    pdf_path = 'tmp/processed.pdf'
-    reports.generate_report(pdf_path, title, paragraph)
-
-    sender = 'automation@example.com'
-    receiver = '@example.com'
-    subject = 'Upload Completed - Online Fruit Store'
-    body = 'All fruits are uploaded to our website successfully. A' \
-                'detailed list is attached to this email.'
-    message = emails.generate_email(sender, receiver, subject, body, pdf_path)
-    emails.send_email(message)
-
-
-if __name__ == "__main__":
-    main()

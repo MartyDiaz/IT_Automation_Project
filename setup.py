@@ -14,7 +14,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
 ]
-INSTALL_REQUIRES = ["requests", "Pillow", "psutil", "reportlab"]
+INSTALL_REQUIRES = ["requests", "Pillow>=4.0.0", "psutil", "reportlab"]
 ##############################################################################
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -60,7 +60,6 @@ if __name__ == "__main__":
         long_description_content_type="text/markdown",
         packages=PACKAGES,
         package_dir={"": "src"},
-        include_package_data=True,
         zip_safe=False,
         classifiers=CLASSIFIERS,
         install_requires=INSTALL_REQUIRES,

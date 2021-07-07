@@ -75,18 +75,3 @@ def post_description(url, data_list):
         request = requests.post(url, json=data)
         if request.status_code != 201:
             raise Exception('POST error status={}'.format(request.status_code))
-
-
-def main():
-    url = ''
-    description_directory = os.path.expanduser('~') + '/Documents' \
-                                                        '/google_class' \
-                                                        '/project_8' \
-                                                        '/supplier-data' \
-                                                        '/descriptions'
-    data_list = read_description_directory(description_directory)
-    post_description(url, data_list)
-
-
-if __name__ == "__main__":
-    main()

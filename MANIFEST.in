@@ -3,5 +3,3 @@ graft .github
 
 # Tests
 graft tests
-
-graft supplier-data

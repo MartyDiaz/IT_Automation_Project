@@ -28,7 +28,8 @@ def post_images(url, image_directory):
                         raise Exception(
                             'POST error status={}'.format(request.status_code))
 
-def main():
+
+"""def main():
     url = "http://localhost/upload/"
 
     image_directory = os.path.expanduser('~') + '/Documents' \
@@ -42,3 +43,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""

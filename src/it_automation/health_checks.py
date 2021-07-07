@@ -58,7 +58,7 @@ def check_localhost_name_resolution():
     """ Checks if localhost ip resolves to 127.0.0.1
 
     Args:
-        None
+        None:
 
     Returns:
         (Bool): Returns true if localhost ip is not 127.0.0.1
@@ -67,29 +67,34 @@ def check_localhost_name_resolution():
     return local_host_ip == '127.0.0.1'
 
 
-def email_health_error(subject):
+def email_health_error(sender, receiver, subject, email_body):
     """ Emails a error message with the passed in subject.
 
         Should be used with check functions in this module to email a
         error message when computer resources are overloaded.
 
     Args:
+        sender(string): The sender of the email.
+
+        receiver(string): email recipient.
+
         subject(string): The subject of the email.
+
+        email_body(string): The body of text in the email message.
 
     Returns:
         None
     """
-    sender = 'automation@example.com'
-    receiver = '@example.com'
-    email_body = 'Please check your system and resolve the issue as soon as ' \
-                 'possible.'
     message = emails.generate_email(sender, receiver, subject, email_body)
     emails.send_email(message)
 
 
 def check_systems(cpu_percent_usage_threshold,
                   available_disk_space_percent_threshold,
-                  memory_threshold):
+                  memory_threshold,
+                  sender,
+                  receiver,
+                  email_body):
     """ Runs all check functions and emails a error message if any return false.
 
         Used in main function. Can set up a cron job with this script to monitor
@@ -103,38 +108,31 @@ def check_systems(cpu_percent_usage_threshold,
         you want the root drive to be above.
 
         memory_threshold(int): The memory threshold in Bytes.
+
+        sender(string): The sender of the email.
+
+        receiver(string): email recipient.
+
+        email_body(string): The body of text in the email message.
+
     Returns:
         None
     """
     if not check_cpu(cpu_percent_usage_threshold):
         subject = 'Error - CPU usage is over ' + str(
             cpu_percent_usage_threshold) + 'percent'
-        email_health_error(subject)
+        email_health_error(sender, receiver, subject, email_body)
 
     if not check_disk_space(available_disk_space_percent_threshold):
         subject = 'Error - Available disk space is less than ' + str(
             available_disk_space_percent_threshold
         )
-        email_health_error(subject)
+        email_health_error(sender, receiver, subject, email_body)
 
     if not check_localhost_name_resolution():
         subject = 'Error - localhost cannot be resolved to 127.0.0.1'
-        email_health_error(subject)
+        email_health_error(sender, receiver, subject, email_body)
 
     if not check_memory(memory_threshold):
         subject = 'Error - Available memory is less than ' + str(memory_threshold)
-        email_health_error(subject)
-
-
-def main():
-    cpu_percent_usage_threshold = 80
-    available_disk_space_percent_threshold = 20
-    memory_threshold = 500 * 1024 * 1024  # 500MB
-
-    check_systems(cpu_percent_usage_threshold,
-                  available_disk_space_percent_threshold,
-                  memory_threshold)
-
-
-if __name__ == "__main__":
-    main()
+        email_health_error(sender, receiver, subject, email_body)

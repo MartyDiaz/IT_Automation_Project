@@ -66,7 +66,11 @@ def test_email_health_error(mock_emails):
            "send_email.return_value": "Sent Email"}
     )
 
-    email_health_error(test_subject)
+    sender = "automation@example.com"
+    receiver = "@example.com"
+    email_body = "Please check your system and resolve the issue as soon as possible."
+
+    email_health_error(sender, receiver, test_subject, email_body)
     mock_emails.generate_email.assert_called()
     mock_emails.send_email.assert_called()
     mock_emails.generate_email.assert_called_with(
@@ -93,6 +97,9 @@ def test_check_systems(
     cpu_percent_usage_threshold = 80
     available_disk_space_percent_threshold = 20
     memory_threshold = 500 * 1024 * 1024  # 500MB
+    sender = "automation@example.com"
+    receiver = "@example.com"
+    email_body = "Please check your system and resolve the issue as soon as possible."
 
     mock_check_localhost_name_resolution.return_value = _input[0]
     mock_check_disk_space.return_value = _input[1]
@@ -100,17 +107,22 @@ def test_check_systems(
     mock_check_memory.return_value = _input[3]
 
     mock_email_health_error_call_list = [
-        mock.call('Error - CPU usage is over ' + str(
-            cpu_percent_usage_threshold) + 'percent'),
-        mock.call('Error - Available disk space is less than ' + str(
-            available_disk_space_percent_threshold)),
-        mock.call('Error - localhost cannot be resolved to 127.0.0.1'),
-        mock.call('Error - Available memory is less than ' + str(memory_threshold))
+        mock.call(sender, receiver, 'Error - CPU usage is over ' + str(
+            cpu_percent_usage_threshold) + 'percent', email_body),
+        mock.call(sender, receiver, 'Error - Available disk space is less than '
+                  + str(available_disk_space_percent_threshold), email_body),
+        mock.call(sender, receiver, 'Error - localhost cannot be resolved to 127.0.0.1',
+                  email_body),
+        mock.call(sender, receiver, 'Error - Available memory is less than ' +
+                  str(memory_threshold), email_body)
     ]
 
     check_systems(cpu_percent_usage_threshold,
                   available_disk_space_percent_threshold,
-                  memory_threshold)
+                  memory_threshold,
+                  sender,
+                  receiver,
+                  email_body)
 
     assert mock_email_health_error.call_count == expected
     if mock_email_health_error.call_count == 4:
