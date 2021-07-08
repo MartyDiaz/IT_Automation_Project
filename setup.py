@@ -14,7 +14,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
 ]
-INSTALL_REQUIRES = ["requests", "Pillow>=4.0.0", "psutil", "reportlab"]
+INSTALL_REQUIRES = ["requests", "psutil", "reportlab"]
 ##############################################################################
 
 HERE = os.path.abspath(os.path.dirname(__file__))
