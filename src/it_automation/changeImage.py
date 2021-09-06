@@ -52,7 +52,7 @@ def resize_image(image, resize_width, resize_height):
 
 
 def save_image_jpeg(image, image_file_name, output_directory):
-    """ Saves an Image object into a jpeg file to a given directory.
+    """ Saves an Image object as a jpeg file to a given directory.
 
     Args:
         image (Image): The Image object to be saved.
@@ -69,8 +69,7 @@ def save_image_jpeg(image, image_file_name, output_directory):
 
 
 def save_image(image, image_file_name, output_directory):
-    file_name, extension = os.path.splitext(image_file_name)
-    out_file = os.path.join(output_directory, file_name)
+    out_file = os.path.join(output_directory, image_file_name)
     image.save(out_file)
     """ Saves an Image object into a file to a given directory.
 
