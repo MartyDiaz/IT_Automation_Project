@@ -1,6 +1,6 @@
-import pytest
 from unittest import mock
 from it_automation.reports import generate_report
+
 
 @mock.patch("it_automation.reports.getSampleStyleSheet")
 @mock.patch("it_automation.reports.Paragraph")

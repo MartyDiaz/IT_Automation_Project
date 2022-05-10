@@ -3,6 +3,7 @@ import os
 import pytest
 from unittest import mock
 
+
 def test_read_description_directory():
     test_description_directory = os.path.join(
         os.path.expanduser('~'),
@@ -51,7 +52,7 @@ def test_read_description_directory():
 def test_post_description(mock_requests_post, _input, expected):
     mock_requests_post.return_value = mock.Mock(**{"status_code": _input})
 
-    data_list = [ "test data 1", "test data 2"]
+    data_list = ["test data 1", "test data 2"]
     test_url = "test url"
 
     if _input != 201:

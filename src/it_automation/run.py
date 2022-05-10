@@ -43,7 +43,7 @@ def read_description_directory(description_directory):
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
             fruit_dictionary = {}
-            file_path = os.path.join(root,file)
+            file_path = os.path.join(root, file)
             filename, extension = os.path.splitext(file)
             with open(file_path) as f:
                 fruit_dictionary['name'] = separator.join(

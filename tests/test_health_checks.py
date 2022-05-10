@@ -16,8 +16,8 @@ def test_check_cpu(mock_psutil_cpu_percent, _input, expected):
 
 @pytest.mark.parametrize(
     "_input, expected",
-    [((1000,900,100),False),
-     ((1000,100,900), True)]
+    [((1000, 900, 100), False),
+     ((1000, 100, 900), True)]
 )
 @mock.patch("it_automation.health_checks.shutil.disk_usage")
 def test_check_disk_space(mock_shutil_disk_usage, _input, expected):

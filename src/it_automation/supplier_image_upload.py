@@ -28,19 +28,18 @@ def post_images(url, image_directory):
                         raise Exception(
                             'POST error status={}'.format(request.status_code))
 
+# def main():
+#    url = "http://localhost/upload/"
+#
+#    image_directory = os.path.expanduser('~') + '/Documents' \
+#                                                '/google_class' \
+#                                                '/project_8' \
+#                                                '/supplier-data' \
+#                                                '/images'
+#
+#    post_images(url, image_directory)
 
-"""def main():
-    url = "http://localhost/upload/"
 
-    image_directory = os.path.expanduser('~') + '/Documents' \
-                                                '/google_class' \
-                                                '/project_8' \
-                                                '/supplier-data' \
-                                                '/images'
-
-    post_images(url, image_directory)
-
-
-if __name__ == "__main__":
-    main()
-"""
+# if __name__ == "__main__":
+#    main()
+# """

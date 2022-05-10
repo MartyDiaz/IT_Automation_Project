@@ -4,9 +4,9 @@
     to an email message and sent.
 """
 import os
-from datetime import date
-from it_automation import reports
-from it_automation import emails
+# from datetime import date
+# from it_automation import reports
+# from it_automation import emails
 
 
 def read_data(description_directory):
@@ -36,11 +36,11 @@ def read_data(description_directory):
         files = [f for f in files if not f[0] == '.']
         dirs[:] = [d for d in dirs if not d[0] == '.']
         for file in files:
-            file_path = os.path.join(root,file)
+            file_path = os.path.join(root, file)
             with open(file_path, 'r') as f:
                 lines = f.readlines()
-                name_list.append( lines[0].strip())
-                weight_list.append( lines[1].strip())
+                name_list.append(lines[0].strip())
+                weight_list.append(lines[1].strip())
     return name_list, weight_list
 
 
@@ -61,6 +61,5 @@ def summary_data(name_list, weight_list):
     """
     summary = ""
     for i in range(len(name_list)):
-        summary += 'name: {} <br /> weight: {} <br /><br />'.format(name_list[i],
-                                                                weight_list[i])
+        summary += 'name: {} <br /> weight: {} <br /><br />'.format(name_list[i], weight_list[i])
     return summary

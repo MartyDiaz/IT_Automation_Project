@@ -1,7 +1,5 @@
-import pytest
 from PIL import Image
 import os
-from unittest import mock
 from it_automation.changeImage import resize_image, save_image_jpeg, convert_image
 
 

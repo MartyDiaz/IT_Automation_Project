@@ -1,6 +1,6 @@
-import pytest
 import os
 from it_automation.report_email import read_data, summary_data
+
 
 def test_read_data():
     test_description_directory = os.path.join(

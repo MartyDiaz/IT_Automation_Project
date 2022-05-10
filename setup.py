@@ -14,7 +14,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
 ]
-INSTALL_REQUIRES = ["requests", "psutil", "reportlab"]
+INSTALL_REQUIRES = ["requests", "psutil", "reportlab", "pillow"]
 ##############################################################################
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -63,6 +63,6 @@ if __name__ == "__main__":
         zip_safe=False,
         classifiers=CLASSIFIERS,
         install_requires=INSTALL_REQUIRES,
-        extras_require={'test': ['pytest', 'pytest-watch']},
+        extras_require={'test': ['pytest', 'pytest-watch', 'flake8>=4.0.1', 'tox>=3.23.1']},
         options={"bdist_wheel": {"universal": "1"}},
     )

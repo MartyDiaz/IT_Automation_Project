@@ -3,6 +3,7 @@ import email.message
 import os.path
 import mimetypes
 import smtplib
+
 """ This module contains functions for generating and sending emails."""
 
 
@@ -19,7 +20,7 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
     Returns:
         email.message.EmailMessage object
     """
-    # If email will not have an attachmentment
+    # If email will not have an attachment
     if attachment_path is None:
         message = email.message.EmailMessage()
         message["From"] = sender
@@ -33,15 +34,15 @@ def generate_email(sender, recipient, subject, body, attachment_path=None):
         message["To"] = recipient
         message["Subject"] = subject
         message.set_content(body)
-        # Adding attachmentment to email
+        # Adding attachment to email
         attachment_filename = os.path.basename(attachment_path)
         mime_type = mimetypes.guess_type(attachment_path)[0]
         mime_type, mime_subtype = mime_type.split('/', 1)
         with open(attachment_path, 'rb') as ap:
             message.add_attachment(ap.read(),
-            maintype = mime_type,
-            subtype = mime_subtype,
-            filename = attachment_filename)
+                                   maintype=mime_type,
+                                   subtype=mime_subtype,
+                                   filename=attachment_filename)
             return message
 
 
