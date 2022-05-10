@@ -64,9 +64,6 @@ resize_height = 400
 convert_image(image_directory, resize_width, resize_height, output_directory)
 ```
 
-## Apology
-Sorry for the mixture of camel case and snake case in some module names. I prefer snake case but I had to have some modules named in camel case because the course required some modules to have specific names that were given to me. I might refactor later to be consistent.
-
 ## Contributing
 Pull requests are welcome.
 
