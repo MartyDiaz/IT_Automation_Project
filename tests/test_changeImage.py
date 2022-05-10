@@ -11,12 +11,11 @@ def test_resize_image():
 
 
 def test_save_image_jpeg(tmpdir):
-    image_path = os.path.expanduser('~') + '/Documents' \
-                                           '/google_class' \
-                                           '/project_8' \
-                                           '/tests' \
-                                           '/images' \
-                                           '/001.tiff'
+    # dir_path = os.path.dirname(os.path.realpath(__file__))
+    # image_path = os.path.expanduser('~') + '/images/001.tiff'
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    image_path = file_path + '/images/001.tiff'
+
     image_file_name = '001.tiff'
     with Image.open(image_path) as im:
         save_image_jpeg(im, image_file_name, tmpdir)
@@ -25,11 +24,8 @@ def test_save_image_jpeg(tmpdir):
 
 
 def test_convert_tiff(tmpdir):
-    test_image_directory = os.path.expanduser('~') + '/Documents' \
-                                           '/google_class' \
-                                           '/project_8' \
-                                           '/tests' \
-                                           '/images'
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    test_image_directory = file_path + '/images'
     resize_width = 600
     resize_height = 400
     convert_image(test_image_directory, resize_width, resize_height, tmpdir)
