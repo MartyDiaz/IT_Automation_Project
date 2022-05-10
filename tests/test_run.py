@@ -5,15 +5,13 @@ from unittest import mock
 
 
 def test_read_description_directory():
+    file_path = os.path.dirname(os.path.realpath(__file__))
     test_description_directory = os.path.join(
-        os.path.expanduser('~'),
-        'Documents/'
-        'google_class/'
-        'project_8/'
-        'tests/'
-        'test_data/'
+        file_path,
+        'test_data',
         'read_data'
     )
+
     test_dic = [{'name': 'Avocado',
                  'weight': 200,
                  'description': 'Avocado contains large amount of oleic acid, '
