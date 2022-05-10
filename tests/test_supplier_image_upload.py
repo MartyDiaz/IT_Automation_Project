@@ -13,11 +13,10 @@ def test_post_images(mock_requests_post, _input, expected):
     mock_requests_post.return_value = mock.Mock(**{"status_code": _input})
 
     test_url = 'test_url'
-    test_image_directory = os.path.expanduser('~') + '/Documents' \
-                                                     '/google_class' \
-                                                     '/project_8' \
-                                                     '/tests' \
-                                                     '/images'
+
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    test_image_directory = os.path.join(file_path, 'images')
+
     if _input != 201:
         with pytest.raises(Exception, match=expected):
             post_images(test_url, test_image_directory)
