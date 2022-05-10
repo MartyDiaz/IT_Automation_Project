@@ -37,9 +37,9 @@ def test_read_description_directory():
                                 'It is good for young and old.\xa0 ',
                  'image_name': '001.jpeg'}
                 ]
-    sorted(test_dic, key=lambda d: list(d.keys()))
+    sorted(test_dic, key=lambda d: list(d.values()))
     dic = read_description_directory(test_description_directory)
-    sorted(dic, key=lambda d: list(d.keys()))
+    sorted(dic, key=lambda d: list(d.values()))
     assert (dic == test_dic)
 
 
