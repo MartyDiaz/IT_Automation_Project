@@ -22,7 +22,7 @@ def test_read_description_directory():
                                 'fiber can remove excess cholesterol from the '
                                 'body, while its insoluble fiber helps keep '
                                 'the digestive system functioning and prevent '
-                                'constipation.',
+                                'constipation. ',
                  'image_name': '002.jpeg'},
                 {'name': 'Apple',
                  'weight': 500,
@@ -40,7 +40,7 @@ def test_read_description_directory():
     sorted(test_dic, key=lambda d: list(d.values()))
     dic = read_description_directory(test_description_directory)
     sorted(dic, key=lambda d: list(d.values()))
-    assert (dic == test_dic)
+    assert dic == test_dic
 
 
 @pytest.mark.parametrize(
