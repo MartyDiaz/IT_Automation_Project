@@ -34,7 +34,7 @@ def test_read_description_directory():
                                 'Apple also contains minerals such as '
                                 'calcium and magnesium, which can help prevent '
                                 'and delay bone loss and maintain bone health. '
-                                'It is good for young and old.\xa0 ',
+                                'It is good for young and old. ',
                  'image_name': '001.jpeg'}
                 ]
     test_dic = sorted(test_dic, key=lambda d: d['name'], reverse=True)
