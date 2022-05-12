@@ -1,3 +1,4 @@
+![Tests](https://github.com/MartyDiaz/IT_Automation_Project/actions/workflows/tests.yml/badge.svg)
 # IT_Automation Project
 
 IT_Automation_Project is a Python library I wrote to complete the final project in Google's IT automation with Python class.
